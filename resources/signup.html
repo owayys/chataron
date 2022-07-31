@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign up</title>
+    <link rel="stylesheet" href="/css/tailwind.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet"
+</head>
+<body class="bg-dark-porp h-screen font-newFont">
+    <div class="w-screen h-screen flex justify-center items-center">
+        <form action="/signup" method="POST" class="w-1/4 m-auto bg-light-porp p-8 pt-4 flex flex-col rounded text-text-porp xl:w-full">
+            <h1 class="text-orang text-2xl mb-5 text-center">Sign Up</h1>
+            <input autocomplete="off" type="text" name="full_name" placeholder="Enter Full Name" class="bg-transparent px-4 py-2 border-b border-text-porp w-full mb-2 outline-none">
+            <input autocomplete="off" type="email" name="email" placeholder="Enter Email Address" class="bg-transparent px-4 py-2 border-b border-text-porp w-full mb-2 outline-none">
+            <input autocomplete="off" type="password" name="password" placeholder="Enter Password" class="bg-transparent px-4 py-2 border-b border-text-porp w-full mb-2 outline-none">
+            <input autocomplete="off" type="submit" value="Sign Up" class="p-2 bg-orang text-white w-full rounded-sm cursor-pointer hover:bg-dark-orang mb-5">
+
+            <a href="/login.html" class="text-center text-text-porp hover:underline">Or click here to Log In</a>
+        </form>
+        <h1 class="fixed text-orang text-3xl font-bold bottom-36">chataron</h1>
+    </div>
+</body>
+</html>
