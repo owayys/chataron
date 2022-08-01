@@ -123,10 +123,6 @@ app.get("/general", authMiddleware, (req, res) => {
     res.render("feed.ejs", { user_name : req.session.user_name });
 })
 
-app.get("*", authMiddleware, (req, res) => {
-    res.redirect("/general");
-})
-
 app.get("/general-2", authMiddleware, (req, res) => {
     res.render("feed.ejs", { user_name : req.session.user_name });
 })
@@ -281,6 +277,8 @@ app.get("/support/all", authMiddleware, (req, res) => {
     })
 })
 
-app.listen(process.env.port, () => {
-    console.log("Server is now listening at port 3000");
-})
+let port=process.env.PORT||3000
+
+app.listen(port, () => {
+    console.log(`App running on port ${port} `);
+});
