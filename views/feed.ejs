@@ -39,7 +39,7 @@
             </div>
         </div>
         <div id="prof-div" class="fixed w-1/5 h-screen py-52 px-8 right-0 bg-transparent text-white text-center items-center xl:translate-x-full">
-            <form id="pfp-form" method="POST" action="/upload" enctype="multipart/form-data">
+            <form id="pfp-form"> <!-- method="POST" action="/upload" enctype="multipart/form-data" -->
                 <label for="pfp-input" class="text-white text-2xl hover:cursor-pointer flex items-center justify-center mb-6 -mt-6">
                     <img id="profile-pic" class="flex fixed place-self-center z-0 rounded-full" width="160px" height="160px" src="/images/<%= user_name %>.png" onerror="this.src='/images/profile.png'">
                     <div class="flex shrink-0 ease-in rounded-full opacity-0 hover:opacity-100 hover:bg-opacity-40 bg-gray-800 h-40 w-40 translate-y-22 items-center justify-center z-10">
