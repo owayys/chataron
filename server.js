@@ -85,7 +85,7 @@ app.post("/login", (req, res) => {
                 if (comp_result) {
                     req.session.user_id = results[0].id
                     req.session.user_name = results[0].name
-                    res.redirect("/general");
+                    res.redirect("/announcements");
                 }
                 else res.sendStatus(401);
             })
