@@ -48,7 +48,7 @@ con.connect((err) => {
     }
 })
 
-app.get("/", (req, res) => {
+app.get("/", authMiddleware, (req, res) => {
     con.query(`INSERT INTO users (name, email) VALUES (' ${req.query.name}', '${req.query.email}')`, (err, result) => {
         if (err) res.send("An error has occured.");
         else res.redirect("/general");
