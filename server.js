@@ -64,36 +64,53 @@ app.get("/signup", (req, res) => {
 })
 
 app.post("/signup", (req, res) => {
-    bcrypt.hash(req.body.password, 10, (err, hashed_password) => {
-        if (err) throw err;
-        con.query(`INSERT INTO users (name,email,password) VALUES ('${req.body.full_name}', '${req.body.email}', '${hashed_password}')`, (err, result) => {
-            if (err) console.log(err);
-            else res.redirect("/announcements");
-        });
-    })
+    const full_name = req.body?.full_name;
+    const email = req.body?.email;
+    const password = req.body?.password;
 
+    if (full_name === undefined || email == undefined || password == undefined || full_name === '' || email == '' || password == '') {
+        redirect("/signup")
+    }
+    else {
+        bcrypt.hash(req.body.password, 10, (err, hashed_password) => {
+            if (err) throw err;
+            con.query(`INSERT INTO users (name,email,password) VALUES ('${req.body.full_name}', '${req.body.email}', '${hashed_password}')`, (err, result) => {
+                if (err) console.log(err);
+                else res.redirect("/announcements");
+            });
+        })
+    }
 })
 
 app.post("/login", (req, res) => {
-    const email = req.body.email;
-    const password = req.body.password;
-    con.query(`SELECT id,name,password FROM users WHERE email='${email}'`, (err, results) => {
-        if (err) res.sendStatus(500);
-        else {
-            const hashed_password = results[0].password;
-            bcrypt.compare(password, hashed_password, (err, comp_result) => {
-                if (err) {
-                    res.sendStatus(500)
+    const email = req.body?.email;
+    const password = req.body?.password;
+
+    if (email == undefined || password == undefined || email == '' || password == '') {
+        alert("Please enter valid Email and Password!");
+        res.redirect("/login")
+    }
+    else {
+        con.query(`SELECT id,name,password FROM users WHERE email='${email}'`, (err, results) => {
+            if (err) res.sendStatus(500);
+            else {
+                if (results.length === 0) {
+                    res.redirect("/login")
                 }
-                else if (comp_result) {
-                    req.session.user_id = results[0].id
-                    req.session.user_name = results[0].name
-                    res.redirect("/announcements");
+                else {
+                    const hashed_password = results[0].password;
+                    bcrypt.compare(password, hashed_password, (err, comp_result) => {
+                        if (comp_result) {
+                            req.session.user_id = results[0].id
+                            req.session.user_name = results[0].name
+                            res.redirect("/announcements");
+                        }
+                        else res.sendStatus(401);
+                    })
                 }
-                else res.sendStatus(401);
-            })
-        }
-    });
+            }
+        });
+    }
 })
 
 const storage = multer.diskStorage({
