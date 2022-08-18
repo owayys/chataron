@@ -7,9 +7,6 @@ const cookieSession = require('cookie-session');
 const { DateTime } = require("luxon");
 const path = require("path");
 const multer = require("multer");
-const queue = require('express-queue');
-
-app.use(queue({ activeLimit: 2, queuedLimit: -1 }));
 
 require('dotenv').config()
 
@@ -85,7 +82,10 @@ app.post("/login", (req, res) => {
         else {
             const hashed_password = results[0].password;
             bcrypt.compare(password, hashed_password, (err, comp_result) => {
-                if (comp_result) {
+                if (err) {
+                    res.sendStatus(500)
+                }
+                else if (comp_result) {
                     req.session.user_id = results[0].id
                     req.session.user_name = results[0].name
                     res.redirect("/announcements");
