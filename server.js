@@ -7,6 +7,9 @@ const cookieSession = require('cookie-session');
 const { DateTime } = require("luxon");
 const path = require("path");
 const multer = require("multer");
+const queue = require('express-queue');
+
+app.use(queue({ activeLimit: 2, queuedLimit: -1 }));
 
 require('dotenv').config()
 
