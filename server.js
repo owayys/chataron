@@ -69,7 +69,7 @@ app.post("/signup", (req, res) => {
     const password = req.body?.password;
 
     if (full_name === undefined || email == undefined || password == undefined || full_name === '' || email == '' || password == '') {
-        redirect("/signup")
+        res.redirect("/signup")
     }
     else {
         bcrypt.hash(req.body.password, 10, (err, hashed_password) => {
@@ -87,7 +87,6 @@ app.post("/login", (req, res) => {
     const password = req.body?.password;
 
     if (email == undefined || password == undefined || email == '' || password == '') {
-        alert("Please enter valid Email and Password!");
         res.redirect("/login")
     }
     else {
